@@ -1,6 +1,7 @@
 package it.springbootlearnbydoing.jareview.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +9,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
 
 import it.springbootlearnbydoing.jareview.enums.UserType;
 
@@ -33,6 +34,16 @@ public class User implements Serializable {
 	
 	@Column(name = "name", length = 50, nullable = false)
 	private String name;
+	
+//	@JsonIgnore
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "author")
+//	private User author	;
+	
+	@OneToMany()
+    private List<Article> articles;
+	
+	@OneToMany()
+	private List<Feedback> feedbacks;
 	
 	public User() {}
 	

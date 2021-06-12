@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,14 +25,12 @@ public class Feedback implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne(mappedBy = "feedback", cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "reviewer_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "reviewer_id", referencedColumnName = "id")
 	private User reviewer;
 	
-	@OneToOne(mappedBy = "feedback", cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "article_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "article_id", referencedColumnName = "id")
 	private Article article;
 	
 	@Column(name = "type", nullable = false)
